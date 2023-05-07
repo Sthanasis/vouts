@@ -73,7 +73,7 @@ GNSS_points2 <- read.csv( "/Users/sakis/Desktop/Voutsis/files/GNSS_data_correcti
 
 GNSS_points2$LATITUDE = GNSS_points2$LATITUDE %>% gsub(pattern = ",", replacement = ".", fixed=T) %>% as.numeric()
 GNSS_points2$LONGITUDE = GNSS_points2$LONGITUDE %>% gsub(pattern = ",", replacement = ".", fixed=T) %>% as.numeric()
-GNSS_points$ELEVcorr_a = GNSS_points2$ELEVcorr_a %>% gsub(pattern = ",", replacement = ".", fixed=T) %>% as.numeric()
+GNSS_points2$ELEVcorr_a = GNSS_points2$ELEVcorr_a %>% gsub(pattern = ",", replacement = ".", fixed=T) %>% as.numeric()
 # pernei tis prwtes 6 seires
 head(GNSS_points2) # validation
 my.sf.point <- st_as_sf(x = GNSS_points2, 
@@ -92,18 +92,18 @@ head(GNSS_data) # validation
 #Data extraction (TandemX_DEM)
 extractdata <- raster::extract(r2, GNSS_data, weights=FALSE) # monodiastatos
 df = data.frame(extractdata)
-# View(df)
+View(df)
 #Plot data (TandemX_DEM)
 df$id <- seq.int(nrow(df))
-#View(df)
+View(df)
 x1 <- df$id
 y1 <- df$extractdata
 plot(x1,y1, main="Elevation_DEM", col.main="black", font.main=4, xlab = "GNSS", ylab="Elevation", type="l")
 #Plot data (GNSS)
 df_gp <-data.frame(GNSS_data)
-#View(df_gp)
+View(df_gp)
 df_gp$id <- seq.int(nrow(df_gp))
-#View(df_gp)
+View(df_gp)
 x2 <- df_gp$id
 y2 <- df_gp$ELEVcorr_a
 plot(x2, y2, main="Elevation_GNSS", col.main="black", font.main=4, xlab = "GNSS", ylab="Elevation", type="l")
@@ -118,10 +118,10 @@ legend(x=31000, y=900, c("TandemX_DEM","GNSS"), cex=.8, col=c("black","red"), lt
 #Data extraction (SRTM_DEM)
 extractdata1 <- raster::extract(r1, GNSS_data, weights=FALSE)
 df1 = data.frame(extractdata1)
-#View(df1)
+View(df1)
 #Plot data (SRTM_DEM)
 df1$id <- seq.int(nrow(df1))
-#View(df1)
+View(df1)
 x3 <- df1$id
 y3 <- df1$extractdata1
 plot(x3, y3, main="Elevation Comparison: SRTM_DEM/GNSS", col.main="black", font.main=4, xlab = "GNSS", ylab="Elevation", type="l", xlim=c(0,39982), ylim=c(0,1000))
@@ -183,6 +183,7 @@ rdvgr_rel_df = get_statistiscs(relative_diffs_gr_rd)
 # GNSS vs Bad Raster 
 rdvbr_rel_df = get_statistiscs(relative_diffs_br_rd)
 # == STEP 3 ==
+# FREQUENCY AND CUMULATIVE FREQUENCY HISTOGRAMS
 # Absolute diffs
 create_histogramm(absolute_diffs_rasters,"Absolute Elevation Error Comparison: TandemX/SRTM", x_title= "Elevation Error" , y_title ="Frequency")
 create_histogramm(absolute_diffs_gr_rd,"Absolute Elevation Error Comparison: TandemX/GNSS", x_title= "Elevation Error" , y_title ="Frequency")
@@ -191,5 +192,5 @@ create_histogramm(absolute_diffs_br_rd,"Absolute Elevation Error Comparison: SRT
 create_histogramm(relative_diffs_rasters,"Relative Elevation Error Comparison: TandemX/SRTM", x_title= "Elevation Error" , y_title ="Frequency")
 create_histogramm(relative_diffs_gr_rd,"Relative Elevation Error Comparison: TandemX/GNSS", x_title= "Elevation Error" , y_title ="Frequency")
 create_histogramm(relative_diffs_br_rd,"Relative Elevation Error Comparison: SRTM/GNSS", x_title= "Elevation Error" , y_title ="Frequency")
-### TODO CUMULUTIVE
+
 # == STEP 4 ==

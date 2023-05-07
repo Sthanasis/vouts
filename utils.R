@@ -66,7 +66,13 @@ create_histogramm <- function(l,title="Title",x_title="X axis", y_title="y axis"
   }
   # ascending sort 
   values = sort(values)
-  hist(values, main=title, xlab = x_title, ylab = y_title,col="darkmagenta")
+  data = data.frame(frequency = values)
+  # Store histogram info
+  my_hist <- hist(data$frequency,main=title, xlab = x_title, ylab = y_title,col="darkmagenta")
+  my_hist$counts <- cumsum(my_hist$counts)    # Change histogram counts
+  plot(my_hist)                               # Draw cumulative histogram
+  
+  # hist(valuescum, main=title, xlab = x_title, ylab = 'CUMULATIVE FREQUENCY',col="darkmagenta")
 }
 
 get_point_difference <- function(array) {
