@@ -1,5 +1,6 @@
 setwd('/Users/sakis/Desktop/Voutsis')
 source("utils.R")
+create_histogramm(absolute_diffs_rasters,"Absolute Elevation Error Comparison: TandemX/SRTM", x_title= "Elevation Error" , y_title ="Frequency")
 
 ########  Points  ########
 # Read Excel file
