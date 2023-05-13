@@ -1,5 +1,6 @@
 setwd('/Users/sakis/Desktop/Voutsis')
 source("utils.R")
+
 ########  Points  ########
 # Read Excel file
 library(readxl)
@@ -173,15 +174,20 @@ rvr_abs_df = get_statistiscs(absolute_diffs_rasters)
 View(rvr_abs_df)
 # GNSS vs Good Raster 
 rdvgr_abs_df = get_statistiscs(absolute_diffs_gr_rd)
+View(rdvgr_abs_df)
 # GNSS vs Bad Raster 
 rdvbr_abs_df = get_statistiscs(absolute_diffs_br_rd)
+View(rdvbr_abs_df)
 ## Relative Statistics
 # Raster vs Raster 
 rvr_rel_df = get_statistiscs(relative_diffs_rasters)
+View(rvr_rel_df)
 # GNSS vs Good Raster 
 rdvgr_rel_df = get_statistiscs(relative_diffs_gr_rd)
+View(rdvgr_rel_df)
 # GNSS vs Bad Raster 
 rdvbr_rel_df = get_statistiscs(relative_diffs_br_rd)
+View(rdvbr_rel_df)
 # == STEP 3 ==
 # FREQUENCY AND CUMULATIVE FREQUENCY HISTOGRAMS
 # Absolute diffs
