@@ -64,12 +64,16 @@ create_histogramm <- function(l,title="Title",x_title="X axis", y_title="y axis"
       values = c(values,x)
     }
   }
-  # ascending sort 
-  values = sort(values)
-  freqdata = data.frame(frequency = values)
   # Store histogram info
-  freq_hist <- hist(freqdata$frequency,main=title, xlab = x_title, ylab = y_title,col="darkmagenta")
-  create_cummulutive_linechart(freq_hist$counts,title)
+  hist_data <- hist(values,plot=FALSE)
+  print(hist_data)
+  cum_freq <- cumsum(hist_data$counts)
+  plot(hist_data, main = title,xlab = x_title, ylab = y_title,col="steelblue")
+  lines(c(hist_data$breaks[1], hist_data$breaks[-1]), c(0, cum_freq), type = "l", col = "darkmagenta")
+  
+  #freq_hist <- hist(freqdata$frequency,main=title, xlab = x_title, ylab = y_title,col="darkmagenta",plot=FALSE)
+  #lines(x=cumsum(freq_hist$counts),type="l")
+  #create_cummulutive_linechart(freq_hist$counts,title)
 }
 
 create_cummulutive_linechart <- function(counts,title) {
